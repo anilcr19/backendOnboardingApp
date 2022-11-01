@@ -249,7 +249,19 @@ public class AppController {
 		
 		System.out.println(" "+email+" "+password);
 		
-		String virtusaemail = oldUser.getFirstname()+oldUser.getMiddlename()+oldUser.getLastname();
+		String virtusaemail = oldUser.getFirstname();
+		
+		if(oldUser.getMiddlename()!=null)
+		{
+			virtusaemail+=oldUser.getMiddlename();
+		}
+		
+		if(oldUser.getLastname()!=null)
+		{
+			virtusaemail+=oldUser.getLastname();
+		}
+		
+		
 		
 		while(userDetailsRepository.findByUsername(virtusaemail+"@virtusa.com")!=null)
 		{
