@@ -8,42 +8,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thecodeveal.app.model.Policies;
-import com.thecodeveal.app.repo.PoliciesRepository;
+import com.thecodeveal.app.model.User;
+import com.thecodeveal.app.repo.UserDetailsRepository;
 
 @Service
 public class PoliciesService {
 
 	@Autowired
-	PoliciesRepository policiesRepository;
+	UserDetailsRepository userDetailsRepository;
 	
-	public Policies savePolicies(Policies res) {
-		return policiesRepository.save(res);
+//	public User savePolicies(Policies res) {
+//		return userDetailsRepository.save(res);
+//	}
+//	
+//	public List<Policies> getPolicies(){
+//		return userDetailsRepository.findAll();
+//	}
+	
+	public User getPolicies(String username) {
+		return userDetailsRepository.findByUsername(username);
 	}
 	
-	public List<Policies> getPolicies(){
-		return policiesRepository.findAll();
-	}
+//	@Transactional
+//	public List<Policies> deletePolicies(String username) {
+//		return userDetailsRepository.deleteByUsername(username);
+//	}
 	
-	public Policies getPolicies(String username) {
-		return policiesRepository.findByUsername(username);
-	}
-	
-	@Transactional
-	public List<Policies> deletePolicies(String username) {
-		return policiesRepository.deleteByUsername(username);
-	}
-	
-	public String updatePolicies(String username, Policies policies) {
-		Policies existingPolicies = policiesRepository.findByUsername(username);
+	public String updatePolicies(String username, User policies) {
+		User existingPolicies = userDetailsRepository.findByUsername(username);
 		if(existingPolicies==null){
             return "Data Not Found";
         }
-		existingPolicies.setUsername(username);
-		existingPolicies.setHr(policies.getHr());
-		existingPolicies.setIt(policies.getIt());
-		existingPolicies.setNda(policies.getNda());
+		System.out.println(policies);
+		if(policies.isHrPolicy())existingPolicies.setHrPolicy(policies.isHrPolicy());
+		if(policies.isItPolicy())existingPolicies.setItPolicy(policies.isItPolicy());
+		if(policies.isNdaPolicy())existingPolicies.setNdaPolicy(policies.isNdaPolicy());
 		
-		policiesRepository.save(existingPolicies);
-		return "Data updated successfully";
+		userDetailsRepository.save(existingPolicies);
+		return "Policies updated successfully";
 	}
 }

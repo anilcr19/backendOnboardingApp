@@ -185,13 +185,13 @@ public class AppController {
 	
 	
 	
-	@PostMapping("/generatemail/{email}/{virtusaemail}/{password}")
-	public boolean insertMail(@PathVariable("email") String email ,
-			@PathVariable("virtusaemail") String virtusaemail , @PathVariable("password") String password ) throws Exception
+	@PostMapping("/generatemail/{email}/{password}")
+	public String insertMail(@PathVariable("email") String email ,
+			 @PathVariable("password") String password ) throws Exception
 	{
 		
 		
-		
+	//	System.out.println((int)Math.floor(Math.random()*10));
 		
 		if((userDetailsRepository.findByUsername(email)==null)||userDetailsRepository.findByUsername(email).getEmailGeneration())
 		{
@@ -200,10 +200,26 @@ public class AppController {
 		}
 		
 		
-		System.out.println(virtusaemail+" "+email+" "+password);
-		
-		
 		User oldUser=userDetailsRepository.findByUsername(email);
+		
+		System.out.println(" "+email+" "+password);
+		
+		String virtusaemail = oldUser.getFirstname()+oldUser.getMiddlename()+oldUser.getLastname();
+		
+		while(userDetailsRepository.findByUsername(virtusaemail+"@virtusa.com")!=null)
+		{
+			
+			for(int i=0;i<2;i++)
+			{
+				
+				virtusaemail=virtusaemail+(int)Math.floor(Math.random()*10);
+			}
+			
+		}
+		
+		
+		virtusaemail=virtusaemail+"@virtusa.com";
+		
 		
 		System.out.println(oldUser);
 		
@@ -286,8 +302,29 @@ public class AppController {
 		
 		System.out.println(user.getUsername()+" "+user.getPassword());
 		
-		return true;
+		return virtusaemail;
 		
+	}
+	
+	@PostMapping("/offerstatus/{username}")
+	public boolean offerstatus(@PathVariable("username") String email)
+	{
+		
+		System.out.println("hello world");
+
+		User u = userDetailsRepository.findByUsername(email);
+		
+		if(u==null)
+		{
+			return false;
+		}
+
+		u.setOfferAcceptance(true);
+		
+		userDetailsRepository.save(u);
+		
+		return true;
+
 	}
 	
 	

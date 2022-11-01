@@ -64,7 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 		
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
 		and().exceptionHandling().authenticationEntryPoint(restAuthentication).and().authorizeRequests(request->
-		request.antMatchers("/h2-console/**","/api/v1/**","/generatemail/**","/saveDocuments/**","/addCandidate/**","/details/**","/userdetails/**","/bankDetails/**","/changepassowrd").permitAll()).addFilterBefore(new JWTAuthenticationFilter(userService, jwtTokenHelper),
+		request.antMatchers("/h2-console/**","/api/v1/**","/generatemail/**","/offerstatus/**","/saveDocuments/**","/addCandidate/**","/details/**","/userdetails/**","/bankDetails/**","/changepassowrd").permitAll()).addFilterBefore(new JWTAuthenticationFilter(userService, jwtTokenHelper),
 				UsernamePasswordAuthenticationFilter.class);
 		
 		

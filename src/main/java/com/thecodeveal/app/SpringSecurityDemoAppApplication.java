@@ -50,7 +50,7 @@ public class SpringSecurityDemoAppApplication {
 
 		
 		
-		if(userDetailsRepository.findByUsername("saicharanpoleboina@gmail.com")==null)
+		if(userDetailsRepository.findByUsername("saicharanpoleboina2@gmail.com")==null)
 		{
 			
 			System.out.println("ok");
@@ -75,13 +75,16 @@ public class SpringSecurityDemoAppApplication {
 			
 			User user =new User();
 		
-			user.setUsername("saicharanpoleboina@gmail.com");
+			user.setUsername("saicharanpoleboina2@gmail.com");
 			
 			user.setPassword(passwordEncoder.encode("CHara!4545"));
 			
 			user.setAuthorites(authorityList);
 			
 			user.setProfilepic("https://northmemorial.com/wp-content/uploads/2016/10/PersonPlaceholder.png");
+			
+			
+			//user.setDepartment(departmentRepository.findBydeptCode("IT"));
 			
 			
 			userDetailsRepository.save(user);
@@ -118,6 +121,10 @@ public class SpringSecurityDemoAppApplication {
 			
 			departmentRepository.save(department);
 			
+			department = new Department("ADMIN", "admin");
+			
+			departmentRepository.save(department);
+			
 			
 			
 			
@@ -125,27 +132,6 @@ public class SpringSecurityDemoAppApplication {
 		
 		
 		
-		if(userDetailsRepository.findByUsername("saicharanpoleboina2@gmail.com")==null)
-		{
-			List<Authority>authorityList=new ArrayList<>();
-			
-			authorityList.addAll(authorityService.findAuthority((long) 1));
-			
-			User user =new User();
-		
-			user.setUsername("saicharanpoleboina2@gmail.com");
-			
-			user.setPassword(passwordEncoder.encode("CHara!4545"));
-			
-			user.setAuthorites(authorityList);
-			
-			user.setProfilepic("https://northmemorial.com/wp-content/uploads/2016/10/PersonPlaceholder.png");
-			
-			
-			userDetailsRepository.save(user);
-			
-		System.out.println(user.getUsername() +" "+user.getPassword());
-		}
 		
 		if(userDetailsRepository.findByUsername("admin@virtusa.com")==null)
 		{
@@ -162,6 +148,9 @@ public class SpringSecurityDemoAppApplication {
 			user.setAuthorites(authorityList);
 			
 			user.setProfilepic("https://northmemorial.com/wp-content/uploads/2016/10/PersonPlaceholder.png");
+			
+			
+			user.setDepartment(departmentRepository.findBydeptCode("ADMIN"));
 			
 			
 					userDetailsRepository.save(user);

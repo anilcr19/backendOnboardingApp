@@ -104,6 +104,36 @@ public class User implements UserDetails{
 	
 	private String role;
 	
+	private boolean offerAcceptance;
+	
+	private boolean itPolicy;
+	public boolean isItPolicy() {
+		return itPolicy;
+	}
+
+	public void setItPolicy(boolean itPolicy) {
+		this.itPolicy = itPolicy;
+	}
+
+	public boolean isNdaPolicy() {
+		return ndaPolicy;
+	}
+
+	public void setNdaPolicy(boolean ndaPolicy) {
+		this.ndaPolicy = ndaPolicy;
+	}
+
+	public boolean isHrPolicy() {
+		return hrPolicy;
+	}
+
+	public void setHrPolicy(boolean hrPolicy) {
+		this.hrPolicy = hrPolicy;
+	}
+
+	private boolean ndaPolicy;
+	private boolean hrPolicy;
+	
 	
 	
 	
@@ -351,6 +381,14 @@ public class User implements UserDetails{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isOfferAcceptance() {
+		return offerAcceptance;
+	}
+
+	public void setOfferAcceptance(boolean offerAcceptance) {
+		this.offerAcceptance = offerAcceptance;
 	}
 	
 	
