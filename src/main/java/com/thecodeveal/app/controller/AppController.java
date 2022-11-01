@@ -179,7 +179,45 @@ public class AppController {
 	}
 	
 	
+	@GetMapping("/bgv/{username}")
+	public boolean bgvVerified(@PathVariable("username") String email)
+	{
+		User user=userDetailsRepository.findByUsername(email);
+		
+		
+		if(user==null)
+		{
+			return false;
+		}
+		
+		user.setBgv(true);
+		
+		userDetailsRepository.save(user);
+		
+		
+		return true;
+		
+	}
 	
+	
+	@GetMapping("/removeCandidate/{username}")
+	public String removeCandidate(@PathVariable("username") String email)
+	{
+			User user =userDetailsRepository.findByUsername(email);
+			
+			if(user==null)
+			{
+				return "invalid";
+			}
+			
+			userDetailsRepository.delete(user);
+			
+			
+			return "success";
+			
+			
+		
+	}
 	
 	
 	
@@ -201,6 +239,13 @@ public class AppController {
 		
 		
 		User oldUser=userDetailsRepository.findByUsername(email);
+		
+		System.out.println(oldUser.isBgv());
+		
+		if(!oldUser.isBgv())
+		{
+			return "invalid";
+		}
 		
 		System.out.println(" "+email+" "+password);
 		

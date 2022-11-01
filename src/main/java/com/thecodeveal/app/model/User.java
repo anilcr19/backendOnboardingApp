@@ -106,6 +106,16 @@ public class User implements UserDetails{
 	
 	private boolean offerAcceptance;
 	
+	private boolean bgv;
+	
+	public boolean isBgv() {
+		return bgv;
+	}
+
+	public void setBgv(boolean bgv) {
+		this.bgv = bgv;
+	}
+
 	private boolean itPolicy;
 	public boolean isItPolicy() {
 		return itPolicy;
