@@ -76,20 +76,21 @@ public class AppController {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@PostMapping("/saveServiceBond")
+	public void addServiceBond(@RequestBody String u) throws JSONException
+	{
+		
+		System.out.println("fdfdkf");
+		JSONObject jsonObject= new JSONObject(u);
+		
+		String servicebondurl=(String) jsonObject.get("filename");
+		
+		User  user = userDetailsRepository.findByUsername((String)jsonObject.get("username"));
+
+		user.setServicebond(servicebondurl);
+		
+		userDetailsRepository.save(user);	
+	}
 	
 	@PostMapping("/changepassword")
 	public void changePassword(@RequestBody String u) throws JSONException,Exception
@@ -338,6 +339,8 @@ public class AppController {
 	    user.setFirstname(oldUser.getFirstname());
 	    
 	    user.setMiddlename(oldUser.getMiddlename());
+	    
+	    user.setServicebond(oldUser.getServicebond());
 	    
 	    user.setLastname(oldUser.getLastname());
 	    

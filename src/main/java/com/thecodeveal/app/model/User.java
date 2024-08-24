@@ -98,6 +98,7 @@ public class User implements UserDetails{
 	private String profilepic;
 	public String resume;
 	public String marksheets;
+	public String servicebond;
 	private Long salary;
 	
 	private String location;
@@ -209,6 +210,13 @@ public class User implements UserDetails{
 
 	public void setAlternatemobilenumber(String alternatemobilenumber) {
 		this.alternatemobilenumber = alternatemobilenumber;
+	}
+	public String getServicebond() {
+		return servicebond;
+	}
+
+	public void setServicebond(String servicebond) {
+		this.servicebond = servicebond;
 	}
 
 	private String pincode;
